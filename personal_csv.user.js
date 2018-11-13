@@ -22,7 +22,7 @@ for (var i=0; i < antal; i++){
      var PNR = divvar[i].childNodes[1].innerText.trim();
      var name = divvar[i].childNodes[3].childNodes[0].nodeValue.trim();
      var email = divvar[i].childNodes[3].childNodes[1].innerText.trim().substr(0,23);
-     csv_data += PNR + ";" + name + ";" + email + "\n";
+     csv_data += PNR + ";" + name.replace(", ", ";") + ";" + email + "\n";
   }
 }
 
