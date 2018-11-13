@@ -26,6 +26,19 @@ for (var i=0; i < antal; i++){
   }
 }
 
+var divvar_po_detail_section = document.getElementsByClassName("po-detail-section");
+var divvar_po_detail_text = document.getElementsByClassName("po-detail-text");
+var antal = divvar_po_detail_section.length;
+
+var kurskod = "";
+for ( var i = 0; i < antal; ++i ){
+  if ( divvar_po_detail_section[i].innerText.trim() == "Kurs- och anmälningskod" ) {
+    kurskod = divvar_po_detail_text[i].innerText.trim().substr(0,6);
+  }
+}
+
+var termin = document.getElementById("select-semester").querySelectorAll("option[selected='']")[0].innerText.trim();
+
 function copyCSVText(){
   var textArea = document.createElement('textarea');
   textArea.setAttribute("type","hidden");
@@ -38,7 +51,7 @@ var docs = document.getElementsByClassName("document-list")[0];
 var li = document.createElement('li');
 var a = document.createElement('a');
 a.href = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv_data);
-a.download = 'data.csv';
+a.download = (kurskod ? 'students-' + kurskod : 'students') + (termin ? '-' + termin : '') + '.csv';
 var linkTxt = document.createTextNode("Download CSV");
 a.appendChild(linkTxt);
 li.appendChild(a);
