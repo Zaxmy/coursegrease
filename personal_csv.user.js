@@ -16,6 +16,7 @@ var antal = divvar.length;
 var csv_data = "";
 
 var reggad  = "studiedeltagande.studenthantering.deltagare.tillstand.registrerad";
+var csv_logo = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Text-csv-text.svg/32px-Text-csv-text.svg.png";
 
 for (var i=0; i < antal; i++){
   if ( divvar[i].attributes["data-status"].nodeValue == reggad) {
@@ -52,7 +53,14 @@ var li = document.createElement('li');
 var a = document.createElement('a');
 a.href = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv_data);
 a.download = (kurskod ? 'students-' + kurskod : 'students') + (termin ? '-' + termin : '') + '.csv';
-var linkTxt = document.createTextNode("Download CSV");
+var linkDiv = document.createElement("DIV");
+linkDiv.classList.add("fa-stack"); 
+linkDiv.classList.add("fa-2x");
+var linkImg = document.createElement("IMG"); 
+linkImg.src=csv_logo;
+var linkTxt = document.createTextNode("Course members (CSV)");
+linkDiv.appendChild(linkImg);
+a.appendChild(linkDiv);
 a.appendChild(linkTxt);
 li.appendChild(a);
 docs.appendChild(li);
